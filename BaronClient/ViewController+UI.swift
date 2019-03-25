@@ -15,8 +15,8 @@ extension ViewController {
         self.arSceneView.session = arSession
         
         // オブジェクト配置のためのシーンを追加
-//        let scene = SCNScene()
-//        self.arSceneView.scene = scene
+        let scene = SCNScene()
+        self.arSceneView.scene = scene
         
         // デバッグ情報表示
         self.arSceneView.showsStatistics = true
