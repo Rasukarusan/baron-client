@@ -40,7 +40,6 @@
 		A22EE1BC223B72790074D338 /* ViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UI.swift"; sourceTree = "<group>"; };
 		A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TapGesture.swift"; sourceTree = "<group>"; };
 		A22EE1C3223B7AE90074D338 /* splash_ip8@3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_ip8@3.png"; sourceTree = "<group>"; };
-		A22EE1C9223B93FE0074D338 /* Cat.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Cat.scn; sourceTree = "<group>"; };
 		A2A5A3F3223B34E00013A4BA /* BaronClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaronClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5A3F6223B34E00013A4BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5A3F8223B34E00013A4BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 				A22EE1C0223B78DA0074D338 /* assets */,
 				A22EE1B8223B5C050074D338 /* Models.scnassets */,
 				A2A5A3F6223B34E00013A4BA /* AppDelegate.swift */,
-				A22EE1C9223B93FE0074D338 /* Cat.scn */,
 				A2A5A3F8223B34E00013A4BA /* ViewController.swift */,
 				A22EE1BC223B72790074D338 /* ViewController+UI.swift */,
 				A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */,
