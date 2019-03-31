@@ -36,8 +36,7 @@ extension ViewController : UIGestureRecognizerDelegate {
         let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
         if point.x == 0 && point.y == 0 && point.z == 0 {
             return
-        }
-        
+        }        
         if self.existNode() {
             self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
             return
@@ -49,8 +48,9 @@ extension ViewController : UIGestureRecognizerDelegate {
      * ノードを画面に作成
      */
     private func addNode(point : SCNVector3) {
-        let box : SCNBox = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
-        let node : SCNNode = SCNNode(geometry: box)
+        let node : SCNNode =  SCNNode(named:"art.scnassets/cat.scn")
+        // scnから読み込むとでかすぎるので0.1倍にする
+        node.scale = SCNVector3.init(0.1, 0.1, 0.1)
         node.name = self.NODE_NAME_BARON
         node.position = point
         self.arSceneView.scene.rootNode.addChildNode(node)
