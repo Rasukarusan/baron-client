@@ -6,7 +6,6 @@
 //  Copyright © 2019年 tanaka.naoto. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 
 class APIClient {

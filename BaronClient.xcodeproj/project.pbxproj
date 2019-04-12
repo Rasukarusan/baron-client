@@ -11,7 +11,7 @@
 		A22EE1BF223B73540074D338 /* ViewController+TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */; };
 		A22EE1C4223B7AE90074D338 /* splash_ip8@3.png in Resources */ = {isa = PBXBuildFile; fileRef = A22EE1C3223B7AE90074D338 /* splash_ip8@3.png */; };
 		A2800C1E224DF23C00A7B979 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A2800C1D224DF23C00A7B979 /* art.scnassets */; };
-		A290DBF6224DFFF400E8C236 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A290DBF5224DFFF400E8C236 /* Extension.swift */; };
+		A290DBF6224DFFF400E8C236 /* SCNNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A290DBF5224DFFF400E8C236 /* SCNNode.swift */; };
 		A2A5A3F7223B34E00013A4BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5A3F6223B34E00013A4BA /* AppDelegate.swift */; };
 		A2A5A3F9223B34E00013A4BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A5A3F8223B34E00013A4BA /* ViewController.swift */; };
 		A2A5A3FC223B34E00013A4BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2A5A3FA223B34E00013A4BA /* Main.storyboard */; };
@@ -47,7 +47,7 @@
 		A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TapGesture.swift"; sourceTree = "<group>"; };
 		A22EE1C3223B7AE90074D338 /* splash_ip8@3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_ip8@3.png"; sourceTree = "<group>"; };
 		A2800C1D224DF23C00A7B979 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		A290DBF5224DFFF400E8C236 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		A290DBF5224DFFF400E8C236 /* SCNNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNode.swift; sourceTree = "<group>"; };
 		A2A5A3F3223B34E00013A4BA /* BaronClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaronClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A5A3F6223B34E00013A4BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2A5A3F8223B34E00013A4BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,14 +127,12 @@
 			children = (
 				A2800C1D224DF23C00A7B979 /* art.scnassets */,
 				A22EE1C0223B78DA0074D338 /* assets */,
+				A2AE8DD822603A43009539A2 /* Extension */,
+				A2AE8DD722603A31009539A2 /* Network */,
 				A2A5A3F6223B34E00013A4BA /* AppDelegate.swift */,
 				A2A5A3F8223B34E00013A4BA /* ViewController.swift */,
 				A22EE1BC223B72790074D338 /* ViewController+UI.swift */,
 				A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */,
-				A2F3987D224DB24C005D5CC2 /* APIClient.swift */,
-				A290DBF5224DFFF400E8C236 /* Extension.swift */,
-				A2F39881224DB52A005D5CC2 /* Cat.swift */,
-				A2F3987E224DB24C005D5CC2 /* Endpoint.swift */,
 				A2A5A3FA223B34E00013A4BA /* Main.storyboard */,
 				A2A5A3FD223B34E00013A4BA /* Assets.xcassets */,
 				A2A5A3FF223B34E00013A4BA /* LaunchScreen.storyboard */,
@@ -159,6 +157,24 @@
 				A2A5A418223B34E00013A4BA /* Info.plist */,
 			);
 			path = BaronClientUITests;
+			sourceTree = "<group>";
+		};
+		A2AE8DD722603A31009539A2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A2F3987D224DB24C005D5CC2 /* APIClient.swift */,
+				A2F39881224DB52A005D5CC2 /* Cat.swift */,
+				A2F3987E224DB24C005D5CC2 /* Endpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A2AE8DD822603A43009539A2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A290DBF5224DFFF400E8C236 /* SCNNode.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		A2F39877224DAEF5005D5CC2 /* Frameworks */ = {
@@ -330,7 +346,7 @@
 				A2F3987F224DB24C005D5CC2 /* APIClient.swift in Sources */,
 				A2F39880224DB24C005D5CC2 /* Endpoint.swift in Sources */,
 				A2A5A3F7223B34E00013A4BA /* AppDelegate.swift in Sources */,
-				A290DBF6224DFFF400E8C236 /* Extension.swift in Sources */,
+				A290DBF6224DFFF400E8C236 /* SCNNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
