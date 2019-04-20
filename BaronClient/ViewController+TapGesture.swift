@@ -36,24 +36,25 @@ extension ViewController : UIGestureRecognizerDelegate {
         let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
         if point.x == 0 && point.y == 0 && point.z == 0 {
             return
-        }        
+        }
         if self.existNode() {
             self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
+            self.lbl2.text = String("x:\(point.x)\ny:\(point.y)\nz:\(point.z)")
             return
         }
-        self.addNode(point: point)
+        self.arSceneView.scene.rootNode.addChildNode(makeNode(point: point))
     }
     
     /**
-     * ノードを画面に作成
+     * ノードを作成
      */
-    private func addNode(point : SCNVector3) {
-        let node : SCNNode =  SCNNode(named:"art.scnassets/cat.scn")
+    func makeNode(point : SCNVector3) -> SCNNode{
+        let node : SCNNode =  SCNNode(named:"art.scnassets/Samba Dancing.dae")
         // scnから読み込むとでかすぎるので0.1倍にする
-        node.scale = SCNVector3.init(0.1, 0.1, 0.1)
+        node.scale = SCNVector3.init(0.001, 0.001, 0.001)
         node.name = self.NODE_NAME_BARON
         node.position = point
-        self.arSceneView.scene.rootNode.addChildNode(node)
+        return node
     }
     
     /**
@@ -63,10 +64,12 @@ extension ViewController : UIGestureRecognizerDelegate {
      * @param SCNVector3 移動させたい場所
      */
     private func moveNode(nodeName : String, position : SCNVector3) {
+        // 上下に動かしたくないのでy軸は0に固定
+        let position = SCNVector3Make(position.x, 0, position.z)
         self.arSceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             if node.name == nodeName {
                 let action = SCNAction.move(to: position, duration: 1.0)
-                node.runAction(action)                
+                node.runAction(action)
             }
         }
     }
