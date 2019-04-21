@@ -52,6 +52,10 @@ class ViewController: UIViewController {
 
 extension ViewController : ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        self.rotateArrowToCat()
+        if(self.initialAnchor == nil) {
+            return
+        }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
