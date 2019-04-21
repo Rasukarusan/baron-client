@@ -32,17 +32,16 @@ extension ViewController : UIGestureRecognizerDelegate {
      * タップ時の処理
      */
     @objc func tapped(_ sender: UITapGestureRecognizer){
+        closeKeyborad()
         let tapPoint : CGPoint = sender.location(in: self.arSceneView)
         let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
         if point.x == 0 && point.y == 0 && point.z == 0 {
             return
         }
-        if self.existNode() {
-            self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
-            self.lbl2.text = String("x:\(point.x)\ny:\(point.y)\nz:\(point.z)")
-            return
+        if let node = self.arSceneView.scene.rootNode.childNode(withName: self.NODE_NAME_BARON, recursively: true) {
+            let distance = getDistance(nodePosition: node.position)
+            showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
         }
-        self.arSceneView.scene.rootNode.addChildNode(makeNode(point: point))
     }
     
     /**
