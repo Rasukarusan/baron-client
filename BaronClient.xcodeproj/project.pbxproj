@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1728026B226C0F00008D9A3D /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1728026A226C0F00008D9A3D /* Util.swift */; };
 		A22EE1BD223B72790074D338 /* ViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22EE1BC223B72790074D338 /* ViewController+UI.swift */; };
 		A22EE1BF223B73540074D338 /* ViewController+TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */; };
 		A22EE1C4223B7AE90074D338 /* splash_ip8@3.png in Resources */ = {isa = PBXBuildFile; fileRef = A22EE1C3223B7AE90074D338 /* splash_ip8@3.png */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1728026A226C0F00008D9A3D /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A22EE1BC223B72790074D338 /* ViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UI.swift"; sourceTree = "<group>"; };
 		A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TapGesture.swift"; sourceTree = "<group>"; };
 		A22EE1C3223B7AE90074D338 /* splash_ip8@3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_ip8@3.png"; sourceTree = "<group>"; };
@@ -133,8 +135,9 @@
 				A2A5A3F8223B34E00013A4BA /* ViewController.swift */,
 				A22EE1BC223B72790074D338 /* ViewController+UI.swift */,
 				A22EE1BE223B73540074D338 /* ViewController+TapGesture.swift */,
-				A2A5A3FA223B34E00013A4BA /* Main.storyboard */,
+				1728026A226C0F00008D9A3D /* Util.swift */,
 				A2A5A3FD223B34E00013A4BA /* Assets.xcassets */,
+				A2A5A3FA223B34E00013A4BA /* Main.storyboard */,
 				A2A5A3FF223B34E00013A4BA /* LaunchScreen.storyboard */,
 				A2A5A402223B34E00013A4BA /* Info.plist */,
 			);
@@ -341,6 +344,7 @@
 			files = (
 				A22EE1BF223B73540074D338 /* ViewController+TapGesture.swift in Sources */,
 				A22EE1BD223B72790074D338 /* ViewController+UI.swift in Sources */,
+				1728026B226C0F00008D9A3D /* Util.swift in Sources */,
 				A2F39882224DB52A005D5CC2 /* Cat.swift in Sources */,
 				A2A5A3F9223B34E00013A4BA /* ViewController.swift in Sources */,
 				A2F3987F224DB24C005D5CC2 /* APIClient.swift in Sources */,
