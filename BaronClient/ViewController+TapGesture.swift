@@ -77,11 +77,9 @@ extension ViewController : UIGestureRecognizerDelegate {
     private func moveNode(nodeName : String, position : SCNVector3) {
         // 上下に動かしたくないのでy軸は0に固定
         let position = SCNVector3Make(position.x, 0, position.z)
-        self.arSceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.name == nodeName {
-                let action = SCNAction.move(to: position, duration: 1.0)
-                node.runAction(action)
-            }
+        if let node = self.arSceneView.scene.rootNode.childNode(withName: nodeName, recursively: true) {
+            let action = SCNAction.move(to: position, duration: 1.0)
+            node.runAction(action)
         }
     }
     
