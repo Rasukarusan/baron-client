@@ -17,8 +17,14 @@ class ViewController: UIViewController {
     var locationManager: CLLocationManager!
     var lat : Double = 0.0
     var lon : Double = 0.0
+    let arrowLbl = UILabel()
     let lbl1 = UILabel()
     let lbl2 = UILabel()
+    let inputX = UITextField()
+    let inputY = UITextField()
+    
+    var initialAnchor : ARPlaneAnchor!
+    var add = 0.5
     
     private var isFloorRecognized = false
 
