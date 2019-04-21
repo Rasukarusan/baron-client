@@ -47,7 +47,7 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
+    }        
 }
 
 extension ViewController : ARSCNViewDelegate {
@@ -55,22 +55,24 @@ extension ViewController : ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print("render add")
+        self.showAlert(message: "床検知にゃん")
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
             return
         }
         if !isFloorRecognized {
-            node.addChildNode(makeCat(initAnchor: planeAnchor))
+            self.initialAnchor = planeAnchor
+            // 特異点抽出を中止するため空配列を定義
             arSceneView.debugOptions = []
             isFloorRecognized = true
+            self.arSceneView.scene.rootNode.addChildNode(makeCat(initAnchor: planeAnchor))
+            self.showAlert(message: "猫追加したにゃん")
         }
     }
     
     private func makeCat(initAnchor: ARPlaneAnchor) -> SCNNode {
-        let point = SCNVector3Make(initAnchor.center.x, 0, initAnchor.center.z)
-        let catNode : SCNNode = makeNode(point: point)
-        return catNode
-    }
+        let point = SCNVector3Make(initAnchor.transform.columns.3.x, initAnchor.transform.columns.3.y, initAnchor.transform.columns.3.z)
+        return makeNode(point: point)
+    }    
 }
 
 extension ViewController : ARSessionDelegate {
