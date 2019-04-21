@@ -38,6 +38,10 @@ extension ViewController : UIGestureRecognizerDelegate {
         if point.x == 0 && point.y == 0 && point.z == 0 {
             return
         }
+        if self.existNode() {
+            self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
+            return
+        }
         if let node = self.arSceneView.scene.rootNode.childNode(withName: self.NODE_NAME_BARON, recursively: true) {
             let distance = getDistance(nodePosition: node.position)
             showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
@@ -62,9 +66,9 @@ extension ViewController : UIGestureRecognizerDelegate {
     func makeNode(point : SCNVector3) -> SCNNode{
         let node : SCNNode =  SCNNode(named:"art.scnassets/Samba Dancing.dae")
         // scnから読み込むとでかすぎるので0.1倍にする
-        node.scale = SCNVector3.init(0.001, 0.001, 0.001)
+        node.scale = SCNVector3.init(0.001, 0.001, 0.001)        
         node.name = self.NODE_NAME_BARON
-        node.position = point
+        node.position = point        
         return node
     }
     
