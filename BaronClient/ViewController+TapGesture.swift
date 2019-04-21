@@ -42,6 +42,18 @@ extension ViewController : UIGestureRecognizerDelegate {
             let distance = getDistance(nodePosition: node.position)
             showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
         }
+        
+    }
+        
+    @objc internal func btnAction(sender:UIButton){
+        let axis = getCatAxis()
+        let set:SCNVector3 = SCNVector3Make(
+            self.initialAnchor.transform.columns.3.x + axis[0],
+            self.initialAnchor.transform.columns.3.y,
+            self.initialAnchor.transform.columns.3.z - axis[1]
+        )
+        self.arSceneView.scene.rootNode.addChildNode(makeNode(point: set))
+        showAlert(message:"にゃにゃんにゃん")
     }
     
     /**
@@ -86,6 +98,18 @@ extension ViewController : UIGestureRecognizerDelegate {
             }
         }
         return exist
+    }
+    
+    private func getCatAxis() -> [Float]{
+        let x:Float = NSString(string: inputX.text!).floatValue
+        let y:Float = NSString(string: inputY.text!).floatValue
+        let axis:[Float] = convertCatAxisToAR(x: x, y: y)
+        print(axis)
+        return axis
+    }
+    
+    private func convertCatAxisToAR(x: Float, y: Float) -> [Float] {
+        return [x/100, y/100]
     }
 }
 
