@@ -2,7 +2,7 @@ import UIKit
 import ARKit
 import SceneKit
 
-extension ViewController {
+extension ViewController : UITextFieldDelegate {
     
     func buildUI() {
         // ARViewの描画
@@ -23,13 +23,19 @@ extension ViewController {
         // デバッグ情報表示
         self.arSceneView.showsStatistics = true
         self.arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+        
+        arrowLbl.frame = CGRect(x: 20, y: 20, width:30, height: 30)
+        arrowLbl.text = "→"
+        arrowLbl.textColor = .red
+        arrowLbl.font = UIFont.boldSystemFont(ofSize: 30)
+        self.view.addSubview(arrowLbl)
                 
         lbl1.frame = CGRect(x: 0, y: 0, width: self.view.frame.width*0.8, height: 100)
         lbl1.center = CGPoint(x: self.view.frame.width/2, y: 100)
         lbl1.text = "latitude"
         lbl1.backgroundColor = .blue
         lbl1.numberOfLines = 0
-//        lbl1.isHidden = true
+        lbl1.isHidden = true
         self.view.addSubview(lbl1)
         
         lbl2.frame = CGRect(x: 0, y: 0, width: self.view.frame.width*0.8, height: 100)
@@ -37,9 +43,35 @@ extension ViewController {
         lbl2.text = "tap point"
         lbl2.backgroundColor = .red
         lbl2.numberOfLines = 0
-//        lbl2.isHidden = true
+        lbl2.isHidden = true
         self.view.addSubview(lbl2)
-
+        
+        let btn = UIButton()
+        btn.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        btn.center = CGPoint(x:self.view.frame.width/2, y:self.view.frame.height/2)
+        btn.backgroundColor = .gray
+        btn.setTitle("ボタン", for: .normal)
+        btn.addTarget(self, action: #selector(ViewController.btnAction(sender:)), for: .touchUpInside)
+//        btn.isHidden = true
+        self.view.addSubview(btn)
+        
+        
+        inputX.frame = CGRect(x: 100, y: 200, width: 100, height: 50)
+        inputX.delegate = self
+        inputX.text = "100"
+        inputX.backgroundColor = .white
+        inputX.layer.borderWidth = 0.5
+        inputX.keyboardType = .default
+        self.view.addSubview(inputX)
+        
+        inputY.frame = CGRect(x: 210, y: 200, width: 100, height: 50)
+        inputY.delegate = self
+        inputY.text = "200"
+        inputY.backgroundColor = .white
+        inputY.layer.borderWidth = 0.5
+        inputY.keyboardType = .default
+        self.view.addSubview(inputY)
+        
     }
     
     // ステータスバーを非表示にする
