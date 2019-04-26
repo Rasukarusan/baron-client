@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import SceneKit
 import CoreLocation
+import Lottie
 
 class ViewController: UIViewController {
     let NODE_NAME_BARON : String = "baron"
@@ -33,6 +34,14 @@ class ViewController: UIViewController {
         self.buildUI()
         self.registTapGesture()
         self.setLocationManager()
+        
+        let animationView = LOTAnimationView(frame: CGRect(x: 0, y: 100, width: 300, height: 300))
+        animationView.backgroundColor = .white
+        animationView.setAnimation(named: "data")
+        animationView.loopAnimation = true
+        animationView.animationSpeed = 2
+        view.addSubview(animationView)
+        animationView.play()
     }
 
     override func viewDidAppear(_ animated: Bool) {

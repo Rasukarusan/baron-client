@@ -39,13 +39,13 @@ extension ViewController : UIGestureRecognizerDelegate {
             return
         }
         if self.existNode() {
-            self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
+            if let node = self.arSceneView.scene.rootNode.childNode(withName: self.NODE_NAME_BARON, recursively: true) {
+                let distance = getDistance(nodePosition: node.position)
+                showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
+            }
             return
         }
-        if let node = self.arSceneView.scene.rootNode.childNode(withName: self.NODE_NAME_BARON, recursively: true) {
-            let distance = getDistance(nodePosition: node.position)
-            showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
-        }
+
         
     }
         
