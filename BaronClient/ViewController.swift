@@ -62,7 +62,6 @@ extension ViewController : ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-//        self.showAlert(message: "床検知にゃん")
         self.meow()
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
             return
@@ -73,7 +72,6 @@ extension ViewController : ARSCNViewDelegate {
             arSceneView.debugOptions = []
             isFloorRecognized = true
             self.arSceneView.scene.rootNode.addChildNode(makeCat(initAnchor: planeAnchor))
-//            self.showAlert(message: "猫追加したにゃん")
             self.hideLoading()
         }
     }
