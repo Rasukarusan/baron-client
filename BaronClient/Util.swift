@@ -15,6 +15,9 @@ extension ViewController {
         self.inputY.resignFirstResponder()
     }
     
+    /**
+     * Loadingアニメーション表示
+     */
     func showLoading() {
         DispatchQueue.main.async {
             self.loadAnimeView.isHidden = false
@@ -22,20 +25,24 @@ extension ViewController {
         }
     }
     
+    /**
+     * Loadingアニメーション非表示
+     */
     func hideLoading() {
         DispatchQueue.main.async {
             self.loadAnimeView.isHidden = true
         }
     }
     
-    
+    /**
+     * 鳴き声アニメーション
+     */
     func meow() {
         DispatchQueue.main.async {
             self.meowAnimeView.isHidden = false
-            self.meowAnimeView.play()            
+            self.meowAnimeView.play()
         }
     }
-    
     
     /**
      * アラート表示
