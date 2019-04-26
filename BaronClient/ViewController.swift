@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     let NODE_NAME_BARON : String = "baron"
     var arSceneView = ARSCNView()
     var locationManager: CLLocationManager!
+    var loadAnimeView = LOTAnimationView()
+    var meowAnimeView = LOTAnimationView()
     var lat : Double = 0.0
     var lon : Double = 0.0
     let arrowLbl = UILabel()
@@ -33,15 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.buildUI()
         self.registTapGesture()
-        self.setLocationManager()
-        
-        let animationView = LOTAnimationView(frame: CGRect(x: 0, y: 100, width: 300, height: 300))
-        animationView.backgroundColor = .white
-        animationView.setAnimation(named: "data")
-        animationView.loopAnimation = true
-        animationView.animationSpeed = 2
-        view.addSubview(animationView)
-        animationView.play()
+        self.setLocationManager()        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +62,8 @@ extension ViewController : ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        self.showAlert(message: "床検知にゃん")
+//        self.showAlert(message: "床検知にゃん")
+        self.meow()
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
             return
         }
@@ -78,7 +73,8 @@ extension ViewController : ARSCNViewDelegate {
             arSceneView.debugOptions = []
             isFloorRecognized = true
             self.arSceneView.scene.rootNode.addChildNode(makeCat(initAnchor: planeAnchor))
-            self.showAlert(message: "猫追加したにゃん")
+//            self.showAlert(message: "猫追加したにゃん")
+            self.hideLoading()
         }
     }
     

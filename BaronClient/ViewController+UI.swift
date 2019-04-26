@@ -1,6 +1,7 @@
 import UIKit
 import ARKit
 import SceneKit
+import Lottie
 
 extension ViewController : UITextFieldDelegate {
     
@@ -24,12 +25,14 @@ extension ViewController : UITextFieldDelegate {
         self.arSceneView.showsStatistics = true
         self.arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         
+        // 猫を指し示す矢印
         arrowLbl.frame = CGRect(x: 20, y: 20, width:30, height: 30)
         arrowLbl.text = "→"
         arrowLbl.textColor = .red
         arrowLbl.font = UIFont.boldSystemFont(ofSize: 30)
         self.view.addSubview(arrowLbl)
-                
+        
+
         lbl1.frame = CGRect(x: 0, y: 0, width: self.view.frame.width*0.8, height: 100)
         lbl1.center = CGPoint(x: self.view.frame.width/2, y: 100)
         lbl1.text = "latitude"
@@ -71,6 +74,24 @@ extension ViewController : UITextFieldDelegate {
         inputY.layer.borderWidth = 0.5
         inputY.keyboardType = .default
         self.view.addSubview(inputY)
+        
+        // NowLoadingアニメーション
+        loadAnimeView = LOTAnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+        loadAnimeView.center = CGPoint(x:self.view.frame.width/2,y:self.view.frame.height/2)
+        loadAnimeView.setAnimation(named: "circle")
+        loadAnimeView.loopAnimation = true
+        loadAnimeView.animationSpeed = 1
+        view.addSubview(loadAnimeView)
+        loadAnimeView.play()
+        
+        // 鳴き声アニメーション
+        meowAnimeView = LOTAnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
+        meowAnimeView.center = CGPoint(x:self.view.frame.width/2,y:self.view.frame.height/2)
+        meowAnimeView.setAnimation(named: "check")
+        meowAnimeView.loopAnimation = false
+        meowAnimeView.animationSpeed = 1
+        view.addSubview(meowAnimeView)
+        loadAnimeView.play()
         
     }
     

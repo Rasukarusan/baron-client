@@ -15,6 +15,28 @@ extension ViewController {
         self.inputY.resignFirstResponder()
     }
     
+    func showLoading() {
+        DispatchQueue.main.async {
+            self.loadAnimeView.isHidden = false
+            self.loadAnimeView.play()
+        }
+    }
+    
+    func hideLoading() {
+        DispatchQueue.main.async {
+            self.loadAnimeView.isHidden = true
+        }
+    }
+    
+    
+    func meow() {
+        DispatchQueue.main.async {
+            self.meowAnimeView.isHidden = false
+            self.meowAnimeView.play()            
+        }
+    }
+    
+    
     /**
      * アラート表示
      *
