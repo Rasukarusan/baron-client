@@ -77,22 +77,24 @@ extension ViewController : UITextFieldDelegate {
         // NowLoadingアニメーション
         loadAnimeView = LOTAnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         loadAnimeView.center = CGPoint(x:self.view.frame.width/2,y:self.view.frame.height/2)
-        loadAnimeView.setAnimation(named: "circle")
+        loadAnimeView.setAnimation(named: "loading")
+        loadAnimeView.backgroundColor = .clear
         loadAnimeView.loopAnimation = true
-        loadAnimeView.animationSpeed = 1
+        loadAnimeView.animationSpeed = 2
         loadAnimeView.contentMode = .scaleAspectFit
-        view.addSubview(loadAnimeView)
         loadAnimeView.play()
+        self.view.addSubview(loadAnimeView)
         
         // 鳴き声アニメーション
         meowAnimeView = LOTAnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         meowAnimeView.center = CGPoint(x:self.view.frame.width/2,y:self.view.frame.height/2)
-        meowAnimeView.setAnimation(named: "check")
+        meowAnimeView.setAnimation(named: "meow")
         meowAnimeView.loopAnimation = false
         meowAnimeView.animationSpeed = 1
+        meowAnimeView.backgroundColor = .clear
         meowAnimeView.contentMode = .scaleAspectFit
-        view.addSubview(meowAnimeView)
-        loadAnimeView.play()
+        self.meowAnimeView.isHidden = true
+        self.view.addSubview(meowAnimeView)
         
     }
     
