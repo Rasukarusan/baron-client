@@ -104,8 +104,17 @@ extension ViewController {
             }
         }
     }
-    
-    func createLineNode(startPosition: SCNVector3, endPosition: SCNVector3, color: UIColor) -> SCNNode {
+
+    func convertCatAxisToAR(x: Int, z: Int) -> SCNVector3 {
+        let point:SCNVector3 = SCNVector3Make(
+            self.initialAnchor.transform.columns.3.x + Float(x/100),
+            self.initialAnchor.transform.columns.3.y,
+            self.initialAnchor.transform.columns.3.z - Float(z/100)
+        )
+        return point
+    }
+
+    private func createLineNode(startPosition: SCNVector3, endPosition: SCNVector3, color: UIColor) -> SCNNode {
         let indices: [Int32] = [0, 1]
         let source = SCNGeometrySource(vertices: [startPosition, endPosition])
         let element = SCNGeometryElement(indices: indices, primitiveType: .line)
