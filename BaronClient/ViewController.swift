@@ -34,8 +34,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildUI()
-        self.registTapGesture()
-        self.setLocationManager()        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -81,40 +79,5 @@ extension ViewController : ARSCNViewDelegate {
         return makeNode(point: point)
     }    
 }
-
-extension ViewController : ARSessionDelegate {
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-//        let currentCamera = session.currentFrame?.camera
-//        let transform = currentCamera?.transform
-    }
 }
 
-extension ViewController : CLLocationManagerDelegate {
-    func setLocationManager() {
-        locationManager = CLLocationManager()
-        guard let locationManager = locationManager else { return }
-        locationManager.requestWhenInUseAuthorization()
-        
-        let status = CLLocationManager.authorizationStatus()
-        if status == .authorizedWhenInUse {
-            locationManager.delegate = self
-            locationManager.distanceFilter = 1
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.first!
-        let lat = location.coordinate.latitude
-        let lon = location.coordinate.longitude
-        self.lat = lat
-        self.lon = lon
-        self.lbl1.text = String("\(lat)\n\(lon)")
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error")
-    }
-}

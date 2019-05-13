@@ -15,7 +15,6 @@ extension ViewController : UITextFieldDelegate {
         // ARViewの設定
         let arSession = ARSession()
         self.arSceneView.session = arSession
-        self.arSceneView.session.delegate = self
         
         // オブジェクト配置のためのシーンを追加
         let scene = SCNScene()
