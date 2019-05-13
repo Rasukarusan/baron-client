@@ -34,6 +34,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildUI()
+        self.registTapGesture()   
+    }
+    
+    private func addCat(initAnchor: ARPlaneAnchor) {
+        APIClient.getCat { cat in
+            let axis:[Float] = self.convertCatAxisToAR(x: cat.locale.next_x_grid, y: cat.locale.next_y_grid)
+            let point:SCNVector3 = SCNVector3Make(
+                initAnchor.transform.columns.3.x + axis[0],
+                initAnchor.transform.columns.3.y,
+                initAnchor.transform.columns.3.z - axis[1]
+            )
+            self.arSceneView.scene.rootNode.addChildNode(self.makeNode(point: point))
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -66,18 +79,11 @@ extension ViewController : ARSCNViewDelegate {
         }
         if !isFloorRecognized {
             self.initialAnchor = planeAnchor
-            // 特異点抽出を中止するため空配列を定義
             arSceneView.debugOptions = []
             isFloorRecognized = true
-            self.arSceneView.scene.rootNode.addChildNode(makeCat(initAnchor: planeAnchor))
+            self.addCat(initAnchor: planeAnchor)
             self.hideLoading()
         }
     }
-    
-    private func makeCat(initAnchor: ARPlaneAnchor) -> SCNNode {
-        let point = SCNVector3Make(initAnchor.transform.columns.3.x, initAnchor.transform.columns.3.y, initAnchor.transform.columns.3.z)
-        return makeNode(point: point)
-    }    
-}
 }
 

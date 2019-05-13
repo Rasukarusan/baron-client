@@ -80,6 +80,7 @@ extension ViewController : UITextFieldDelegate {
         loadAnimeView.setAnimation(named: "circle")
         loadAnimeView.loopAnimation = true
         loadAnimeView.animationSpeed = 1
+        loadAnimeView.contentMode = .scaleAspectFit
         view.addSubview(loadAnimeView)
         loadAnimeView.play()
         
@@ -89,6 +90,7 @@ extension ViewController : UITextFieldDelegate {
         meowAnimeView.setAnimation(named: "check")
         meowAnimeView.loopAnimation = false
         meowAnimeView.animationSpeed = 1
+        meowAnimeView.contentMode = .scaleAspectFit
         view.addSubview(meowAnimeView)
         loadAnimeView.play()
         
