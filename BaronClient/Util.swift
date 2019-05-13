@@ -36,11 +36,15 @@ extension ViewController {
     
     /**
      * 鳴き声アニメーション
+     *
+     * ※豆知識：meow = (猫の)鳴き声
      */
     func meow() {
         DispatchQueue.main.async {
             self.meowAnimeView.isHidden = false
-            self.meowAnimeView.play()
+            self.meowAnimeView.play{ (finished) in
+                self.meowAnimeView.isHidden = true
+            }
         }
     }
     
