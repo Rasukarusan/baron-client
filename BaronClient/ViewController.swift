@@ -9,43 +9,50 @@
 import UIKit
 import ARKit
 import SceneKit
-import CoreLocation
 import Lottie
 
 class ViewController: UIViewController {
     let NODE_NAME_BARON : String = "baron"
     var arSceneView = ARSCNView()
-    var locationManager: CLLocationManager!
+    var initialAnchor : ARPlaneAnchor!
     var loadAnimeView = LOTAnimationView()
     var meowAnimeView = LOTAnimationView()
-    var lat : Double = 0.0
-    var lon : Double = 0.0
     let arrowLbl = UILabel()
     let lbl1 = UILabel()
     let lbl2 = UILabel()
     let inputX = UITextField()
     let inputY = UITextField()
     
-    var initialAnchor : ARPlaneAnchor!
-    var add = 0.5
-    
     private var isFloorRecognized = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildUI()
         self.registTapGesture()   
     }
-    
-    private func addCat(initAnchor: ARPlaneAnchor) {
+
+    private func addCat() {
         APIClient.getCat { cat in
-            let axis:[Float] = self.convertCatAxisToAR(x: cat.locale.next_x_grid, y: cat.locale.next_y_grid)
-            let point:SCNVector3 = SCNVector3Make(
-                initAnchor.transform.columns.3.x + axis[0],
-                initAnchor.transform.columns.3.y,
-                initAnchor.transform.columns.3.z - axis[1]
-            )
+            let point = self.convertCatAxisToAR(x: cat.locale.next_x_grid, z: cat.locale.next_y_grid)
             self.arSceneView.scene.rootNode.addChildNode(self.makeNode(point: point))
+        }
+    }
+
+    private func runTimerForUpdateCat() {
+        Timer.scheduledTimer(timeInterval: 1,
+            target: self,
+            selector: #selector(ViewController.updateCat),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+
+    @objc private func updateCat() {
+        DispatchQueue.main.async {
+            APIClient.getCat(completion: { (cat) in
+                let points = self.convertCatAxisToAR(x: cat.locale.next_x_grid, z: cat.locale.next_y_grid)
+                self.moveNode(nodeName: self.NODE_NAME_BARON, position: points)
+            })
         }
     }
 
@@ -66,24 +73,27 @@ class ViewController: UIViewController {
 
 extension ViewController : ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        self.rotateArrowToCat()
+        self.rotateArrowToCat()        
         if(self.initialAnchor == nil) {
             return
         }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        self.meow()
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
             return
         }
+        self.meow()
         if !isFloorRecognized {
+            self.hideLoading()
             self.initialAnchor = planeAnchor
             arSceneView.debugOptions = []
             isFloorRecognized = true
-            self.addCat(initAnchor: planeAnchor)
-            self.hideLoading()
+            self.addCat()
+            // renderは別スレッドで動いているためメインスレッド内でタイマーを発火させる
+            DispatchQueue.main.async {
+                self.runTimerForUpdateCat()
+            }
         }
     }
 }
-
