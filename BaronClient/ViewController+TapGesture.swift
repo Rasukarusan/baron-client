@@ -59,9 +59,9 @@ extension ViewController : UIGestureRecognizerDelegate {
      * ノードを作成
      */
     func makeNode(point : SCNVector3) -> SCNNode{
-        let node : SCNNode =  SCNNode(named:"art.scnassets/Samba Dancing.dae")
-        // scnから読み込むとでかすぎるので0.1倍にする
-        node.scale = SCNVector3.init(0.001, 0.001, 0.001)        
+        let node : SCNNode =  SCNNode(named:"art.scnassets/Cat.dae")
+        let scale = 0.5
+        node.scale = SCNVector3.init(scale, scale, scale)
         node.name = self.NODE_NAME_BARON
         node.position = point        
         return node
@@ -77,7 +77,7 @@ extension ViewController : UIGestureRecognizerDelegate {
         // 上下に動かしたくないのでy軸は0に固定
         let position = SCNVector3Make(position.x, 0, position.z)
         if let node = self.arSceneView.scene.rootNode.childNode(withName: nodeName, recursively: true) {
-            let action = SCNAction.move(to: position, duration: 1.0)
+            let action = SCNAction.move(to: position, duration: 1.5)
             node.runAction(action)
         }
     }
