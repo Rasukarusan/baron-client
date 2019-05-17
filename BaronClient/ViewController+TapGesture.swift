@@ -5,12 +5,31 @@ import SceneKit
 extension ViewController : UIGestureRecognizerDelegate {        
     
     /*
-     * 画面タップ検出
+     * 画面タップ検出登録
      */
     func registTapGesture() {
         let tapGesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapped(_:)))
         tapGesture.delegate = self
         self.arSceneView.addGestureRecognizer(tapGesture)
+    }
+    
+    /**
+     * タップ時の処理
+     */
+    @objc func tapped(_ sender: UITapGestureRecognizer){
+        let tapPoint : CGPoint = sender.location(in: self.arSceneView)
+        let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
+        if point.x == 0 && point.y == 0 && point.z == 0 {
+            return
+        }
+
+        if self.existNode() {
+            if let node = self.arSceneView.scene.rootNode.childNode(withName: self.NODE_NAME_BARON, recursively: true) {
+                let distance = getDistance(nodePosition: node.position)
+                showAlert(message: String.init(format: "%.2fm", arguments: [distance]))
+            }
+            return
+        }
     }
     
     /**
@@ -27,33 +46,25 @@ extension ViewController : UIGestureRecognizerDelegate {
         let point = SCNVector3.init(hitPoint.worldTransform.columns.3.x, hitPoint.worldTransform.columns.3.y, hitPoint.worldTransform.columns.3.z)
         return point
     }
-    
-    /**
-     * タップ時の処理
-     */
-    @objc func tapped(_ sender: UITapGestureRecognizer){
-        let tapPoint : CGPoint = sender.location(in: self.arSceneView)
-        let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
-        if point.x == 0 && point.y == 0 && point.z == 0 {
-            return
-        }        
-        if self.existNode() {
-            self.moveNode(nodeName: self.NODE_NAME_BARON, position: point)
-            return
+        
+    @objc internal func btnAction(sender:UIButton){
+        APIClient.getCat { cat in
+            let point = self.convertCatAxisToAR(x: cat.locale.next_y_grid, z: cat.locale.next_y_grid)
+            self.arSceneView.scene.rootNode.addChildNode(self.makeNode(point: point))
+            self.showAlert(message:"にゃにゃんにゃん")
         }
-        self.addNode(point: point)
     }
     
     /**
-     * ノードを画面に作成
+     * ノードを作成
      */
-    private func addNode(point : SCNVector3) {
-        let node : SCNNode =  SCNNode(named:"art.scnassets/cat.scn")
-        // scnから読み込むとでかすぎるので0.1倍にする
-        node.scale = SCNVector3.init(0.1, 0.1, 0.1)
+    func makeNode(point : SCNVector3) -> SCNNode{
+        let node : SCNNode =  SCNNode(named:"art.scnassets/Cat.dae")
+        let scale = 0.5
+        node.scale = SCNVector3.init(scale, scale, scale)
         node.name = self.NODE_NAME_BARON
-        node.position = point
-        self.arSceneView.scene.rootNode.addChildNode(node)
+        node.position = point        
+        return node
     }
     
     /**
@@ -62,12 +73,12 @@ extension ViewController : UIGestureRecognizerDelegate {
      * @param String ノードの一意名
      * @param SCNVector3 移動させたい場所
      */
-    private func moveNode(nodeName : String, position : SCNVector3) {
-        self.arSceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            if node.name == nodeName {
-                let action = SCNAction.move(to: position, duration: 1.0)
-                node.runAction(action)                
-            }
+    func moveNode(nodeName : String, position : SCNVector3) {
+        // 上下に動かしたくないのでy軸は0に固定
+        let position = SCNVector3Make(position.x, 0, position.z)
+        if let node = self.arSceneView.scene.rootNode.childNode(withName: nodeName, recursively: true) {
+            let action = SCNAction.move(to: position, duration: 1.5)
+            node.runAction(action)
         }
     }
     
@@ -84,6 +95,6 @@ extension ViewController : UIGestureRecognizerDelegate {
             }
         }
         return exist
-    }
+    }    
 }
 
