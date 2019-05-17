@@ -31,30 +31,6 @@ extension ViewController : UITextFieldDelegate {
         arrowLbl.font = UIFont.boldSystemFont(ofSize: 30)
         self.view.addSubview(arrowLbl)
         
-        let btn = UIButton()
-        btn.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        btn.center = CGPoint(x:self.view.frame.width/2, y:self.view.frame.height/2)
-        btn.backgroundColor = .gray
-        btn.setTitle("ボタン", for: .normal)
-        btn.addTarget(self, action: #selector(ViewController.btnAction(sender:)), for: .touchUpInside)
-        self.view.addSubview(btn)
-        
-        inputX.frame = CGRect(x: 100, y: 200, width: 100, height: 50)
-        inputX.delegate = self
-        inputX.text = "100"
-        inputX.backgroundColor = .white
-        inputX.layer.borderWidth = 0.5
-        inputX.keyboardType = .default
-        self.view.addSubview(inputX)
-        
-        inputY.frame = CGRect(x: 210, y: 200, width: 100, height: 50)
-        inputY.delegate = self
-        inputY.text = "200"
-        inputY.backgroundColor = .white
-        inputY.layer.borderWidth = 0.5
-        inputY.keyboardType = .default
-        self.view.addSubview(inputY)
-        
         // NowLoadingアニメーション
         loadAnimeView = LOTAnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 200))
         loadAnimeView.center = CGPoint(x:self.view.frame.width/2,y:self.view.frame.height/2)
@@ -76,11 +52,6 @@ extension ViewController : UITextFieldDelegate {
         meowAnimeView.contentMode = .scaleAspectFit
         self.meowAnimeView.isHidden = true
         self.view.addSubview(meowAnimeView)
-        
-        inputX.isHidden = true
-        inputY.isHidden = true
-        btn.isHidden = true
-        
     }
     
     // ステータスバーを非表示にする

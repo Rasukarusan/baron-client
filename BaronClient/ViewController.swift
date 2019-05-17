@@ -18,10 +18,6 @@ class ViewController: UIViewController {
     var loadAnimeView = LOTAnimationView()
     var meowAnimeView = LOTAnimationView()
     let arrowLbl = UILabel()
-    let lbl1 = UILabel()
-    let lbl2 = UILabel()
-    let inputX = UITextField()
-    let inputY = UITextField()
     
     private var isFloorRecognized = false
     

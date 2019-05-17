@@ -8,12 +8,9 @@
 
 import SceneKit
 
+
+// FIXME: ハイパー神クラス
 extension ViewController {
-    
-    func closeKeyborad() {
-        self.inputX.resignFirstResponder()
-        self.inputY.resignFirstResponder()
-    }
     
     /**
      * Loadingアニメーション表示
@@ -112,29 +109,5 @@ extension ViewController {
             self.initialAnchor.transform.columns.3.z - Float(z/100)
         )
         return point
-    }
-
-    private func createLineNode(startPosition: SCNVector3, endPosition: SCNVector3, color: UIColor) -> SCNNode {
-        let indices: [Int32] = [0, 1]
-        let source = SCNGeometrySource(vertices: [startPosition, endPosition])
-        let element = SCNGeometryElement(indices: indices, primitiveType: .line)
-        let line = SCNGeometry(sources: [source], elements: [element])
-        line.firstMaterial?.lightingModel = SCNMaterial.LightingModel.blinn
-        let lineNode = SCNNode(geometry: line)
-        lineNode.geometry?.firstMaterial?.diffuse.contents = color
-        lineNode.name = "line"
-        return lineNode
-    }
-    
-    func drawLine() {
-        if let lineNode = self.arSceneView.scene.rootNode.childNode(withName: "line", recursively: true) {
-            lineNode.removeFromParentNode()
-        }
-        if let camera = self.arSceneView.pointOfView {
-            let startPosixion = SCNVector3Make(self.initialAnchor.transform.columns.3.x, self.initialAnchor.transform.columns.3.y, self.initialAnchor.transform.columns.3.z)
-            let endPosision = SCNVector3Make(camera.position.x, camera.position.y, camera.position.z)
-            let line = createLineNode(startPosition: startPosixion, endPosition: endPosision, color: .red)
-            arSceneView.scene.rootNode.addChildNode(line)
-        }
     }
 }

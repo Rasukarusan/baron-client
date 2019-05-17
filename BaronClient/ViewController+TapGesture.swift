@@ -17,7 +17,6 @@ extension ViewController : UIGestureRecognizerDelegate {
      * タップ時の処理
      */
     @objc func tapped(_ sender: UITapGestureRecognizer){
-        closeKeyborad()
         let tapPoint : CGPoint = sender.location(in: self.arSceneView)
         let point : SCNVector3 = self.getRealPoint(tapPoint: tapPoint)
         if point.x == 0 && point.y == 0 && point.z == 0 {
